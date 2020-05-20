@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/reset.css" type="text/css">
+  <link rel="stylesheet" href="css/grid.css" type="text/css">
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+  <header>
+    <h1>Bow Memo</h1>
+  </header>
+  <nav id="menu">
+    <ul>
+      <li><a href="#" data-id="home_area">HOME</a></li>
+      <li><a href="#" data-id="write_area">WRITE</a></li>
+      <li><a href="#" data-id="load_area">LOAD</a></li>
+      <li><a href="#" data-id="save_area">SAVE</a></li>
+      <li><a href="#" data-id="login_area">LOGIN</a></li>
+    </ul>
+  </nav>
+  <main>
+    <div id="mask"></div>
+    <section id="home_area" class="content active">
+      <h1>HOME</h1>
+      <article>
+        <ul>
+          <li>
+            <dl>
+              <dt>
+                <span class="date">2020 / 06 / 06</span>
+                <span class="memo">タイトルタイトルタイトルタイトル</span>
+              </dt>
+              <dd>
+                <p>寒い冬が北方から、狐きつねの親子の棲すんでいる森へもやって来ました。
+                  　或朝あるあさ洞穴ほらあなから子供の狐が出ようとしましたが、
+                  「あっ」と叫んで眼めを抑おさえながら母さん狐のところへころげて来ました。
+                  「母ちゃん、眼に何か刺さった、ぬいて頂戴ちょうだい早く早く」と言いました。
+                  　母さん狐がびっくりして、あわてふためきながら、眼を抑えている子供の手を恐る恐るとりのけて見ましたが、何も刺さってはいませんでした。母さん狐は洞穴の入口から外へ出て始めてわけが解わかりました。</p>
+              </dd>
+            </dl>
+          </li>
+          <li>
+            <dl>
+              <dt>
+                <span class="date">2020 / 06 / 06</span>
+                <span class="memo">タイトルタイトルタイトルタイトル</span>
+              </dt>
+              <dd>
+                <p>寒い冬が北方から、狐きつねの親子の棲すんでいる森へもやって来ました。
+                  　或朝あるあさ洞穴ほらあなから子供の狐が出ようとしましたが、
+                  「あっ」と叫んで眼めを抑おさえながら母さん狐のところへころげて来ました。
+                  「母ちゃん、眼に何か刺さった、ぬいて頂戴ちょうだい早く早く」と言いました。
+                  　母さん狐がびっくりして、あわてふためきながら、眼を抑えている子供の手を恐る恐るとりのけて見ましたが、何も刺さってはいませんでした。母さん狐は洞穴の入口から外へ出て始めてわけが解わかりました。</p>
+              </dd>
+            </dl>
+          </li>
+          <li>
+            <dl>
+              <dt>
+                <span class="date">2020 / 06 / 06</span>
+                <span class="memo">タイトルタイトルタイトルタイトル</span>
+              </dt>
+              <dd>
+                <p>寒い冬が北方から、狐きつねの親子の棲すんでいる森へもやって来ました。
+                  　或朝あるあさ洞穴ほらあなから子供の狐が出ようとしましたが、
+                  「あっ」と叫んで眼めを抑おさえながら母さん狐のところへころげて来ました。
+                  「母ちゃん、眼に何か刺さった、ぬいて頂戴ちょうだい早く早く」と言いました。
+                  　母さん狐がびっくりして、あわてふためきながら、眼を抑えている子供の手を恐る恐るとりのけて見ましたが、何も刺さってはいませんでした。母さん狐は洞穴の入口から外へ出て始めてわけが解わかりました。</p>
+              </dd>
+            </dl>
+          </li>
+        </ul>
+
+      </article>
+    </section>
+    <section id="write_area" class="content">
+      <h1>WRITE MODE</h1>
+      <article>
+        <input type="text" class="memo_title" name="memo_title">
+        <button name="memo_submit">登録</button>
+      </article>
+    </section>
+    <section id="load_area" class="content">
+      <h1>DATA UPLOAD</h1>
+      <article>
+        <p>バックアップしたデータをアップロードします。アップロードするファイルを選択してください。</p>
+        <input type="text" name="filename" class="upload_file">
+        <button type="submit" name="filename" class="upload_file">選択</button>
+        <button type="submit" name="submit" class="submit_file">送信</button>
+      </article>
+    </section>
+    <section id="save_area" class="content">
+      <h1>DATA DOWNLOAD</h1>
+      <article>
+        <p>データのバックアップをダウンロードします。</p>
+        <input type="text" name="filename" class="upload_file">
+        <button type="submit" name="filename" class="upload_file">選択</button>
+        <button type="submit" name="submit" class="submit_file">送信</button>
+      </article>
+    </section>
+    <section id="login_area" class="content">
+      <h1>LOGIN</h1>
+      <article>
+        <p>ログインにはGoogleアカウントが必要です。</p>
+      </article>
+    </section>
+  </main>
+  <footer>
+    <p>&copy;BowWorks</p>
+  </footer>
+  <script src="js/jquery.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+@charset "UTF-8";
+/*　ページの切り替え　*/
+.content {
+  display: none;
+}
+
+.content.active {
+  display: block;
+}
+/*# sourceMappingURL=grid.css.map */
