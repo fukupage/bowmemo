@@ -4,6 +4,15 @@
 //--------------------------------------------------------------------------------------------
 //日時に関するもの
 let now = new Date();
+let KEY;
+let YY;
+let MM;
+let DD;
+let HOUR;
+let MIN;
+let SEC;
+let TITLE;
+let TEXT;
 
 
 
@@ -17,14 +26,7 @@ let postItem;
 //とりあえず、LocalStorageを利用する。
 //--------------------------------------------------------------------------------------------
 function database() {
-  let req = new XMLHttpRequest();
-  req.onreadystatechange = function(){
-    if(req.readyState == 4 && req.status == 200){
-      postItem = req.responseText;
-    }
-  };
-  req.open("GET", "log/log.json", false);
-  req.send(null);
+
 }
 
 //取得したファイルから日時とタイトルと記事を取得(fullyear - month - date /hour(24) /min /sec )
@@ -51,14 +53,38 @@ function timeline() {
   //格納されたjsonファイルを読み込む
 
   //読み込んだjsonをhtmlとして吐き出す
-  console.log(postItem);
-  //
+  let postArea = document.getElementById('inner');
 
+  for (let i = 0; i < postItem.length; i++) {
+    if(postItem[i] != null){
+
+      KEY = postItem[i].key;
+      YY = postItem[i].year;
+      MM = postItem[i].month;
+      DD = postItem[i].date;
+      HOUR = postItem[i].hour;
+      MIN = postItem[i].min;
+      SEC = postItem[i].sec;
+      TITLE = postItem[i].title;
+      TEXT = postItem[i].text;
+
+      let tlTemp = `
+      <article>
+      <h2>${TITLE}</h2>
+      <span>${YY} / ${MM} / ${DD} -- ${HOUR}:${MIN}:${SEC}</span>
+      <p>${TEXT}</p>
+      </article>
+      `;
+
+      document.write(postArea.innerHTML += tlTemp);
+    }
+  }
 }
 
 //ログイン機能(ここではGoogleのアカウントなんかでログインができる仕様にします)。
 //--------------------------------------------------------------------------------------------
 function login() {
+
 
 }
 
@@ -66,27 +92,27 @@ function login() {
 //--------------------------------------------------------------------------------------------
 function postmemo() {
 
-//ログインしてない場合はごめんなさいページを表示
+  //ログインしてない場合はごめんなさいページを表示
 
 
-//ログインしている場合は記事の投稿フォームを表示
+  //ログインしている場合は記事の投稿フォームを表示
 
 
-//投稿ボタンが押された際は一旦確認する
+  //投稿ボタンが押された際は一旦確認する
 
 
-//問題ない場合はjson形式で格納（一旦投稿順にソートする）
+  //問題ない場合はjson形式で格納（一旦投稿順にソートする）
 
 }
 
 //ファイルの書き出し（json形式のログファイルを吐き出します）。
 //--------------------------------------------------------------------------------------------
-function getmemo(){
+function getmemo() {
 
-//ログインしてない場合はごめんなさいページを表示(iframeで別デザインを読み込む？)
+  //ログインしてない場合はごめんなさいページを表示(iframeで別デザインを読み込む？)
 
 
-//ログインしている書き出しページを表示
+  //ログインしている書き出しページを表示
 
 
 
@@ -100,6 +126,15 @@ function importmemo() {
 
 
   //ログインしている読み込みを表示
+
+  let req = new XMLHttpRequest();
+  req.onreadystatechange = function () {
+    if (req.readyState == 4 && req.status == 200) {
+      postItem = JSON.parse(req.responseText);
+    }
+  };
+  req.open("GET", "log/log.json", false);
+  req.send(null);
 }
 
 
@@ -128,6 +163,7 @@ function views() {
 }
 
 database();
+importmemo();
 timeline();
 timestamp();
 views();
