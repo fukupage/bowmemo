@@ -5,7 +5,10 @@
 //日時に関するもの
 let now = new Date();
 
+
+
 //記事に関するもの
+let postItem;
 
 //ファイル操作に関するもの
 
@@ -14,7 +17,14 @@ let now = new Date();
 //とりあえず、LocalStorageを利用する。
 //--------------------------------------------------------------------------------------------
 function database() {
-
+  let req = new XMLHttpRequest();
+  req.onreadystatechange = function(){
+    if(req.readyState == 4 && req.status == 200){
+      postItem = req.responseText;
+    }
+  };
+  req.open("GET", "log/log.json", false);
+  req.send(null);
 }
 
 //取得したファイルから日時とタイトルと記事を取得(fullyear - month - date /hour(24) /min /sec )
@@ -41,7 +51,7 @@ function timeline() {
   //格納されたjsonファイルを読み込む
 
   //読み込んだjsonをhtmlとして吐き出す
-
+  console.log(postItem);
   //
 
 }
@@ -117,6 +127,7 @@ function views() {
   });
 }
 
-
+database();
+timeline();
 timestamp();
 views();
