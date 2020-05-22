@@ -27,72 +27,24 @@
     <div id="mask"></div>
     <section id="home_area" class="content active">
       <h1>HOME</h1>
-      <section id="inner">
-
-      </section>
-      <article>
-        <ul>
-          <li>
-            <dl>
-              <dt>
-                <span class="date">2020 / 06 / 06</span>
-                <span class="memo">タイトルタイトルタイトルタイトル</span>
-              </dt>
-              <dd>
-                <p>寒い冬が北方から、狐きつねの親子の棲すんでいる森へもやって来ました。
-                  　或朝あるあさ洞穴ほらあなから子供の狐が出ようとしましたが、
-                  「あっ」と叫んで眼めを抑おさえながら母さん狐のところへころげて来ました。
-                  「母ちゃん、眼に何か刺さった、ぬいて頂戴ちょうだい早く早く」と言いました。
-                  　母さん狐がびっくりして、あわてふためきながら、眼を抑えている子供の手を恐る恐るとりのけて見ましたが、何も刺さってはいませんでした。母さん狐は洞穴の入口から外へ出て始めてわけが解わかりました。</p>
-              </dd>
-            </dl>
-          </li>
-          <li>
-            <dl>
-              <dt>
-                <span class="date">2020 / 06 / 06</span>
-                <span class="memo">タイトルタイトルタイトルタイトル</span>
-              </dt>
-              <dd>
-                <p>寒い冬が北方から、狐きつねの親子の棲すんでいる森へもやって来ました。
-                  　或朝あるあさ洞穴ほらあなから子供の狐が出ようとしましたが、
-                  「あっ」と叫んで眼めを抑おさえながら母さん狐のところへころげて来ました。
-                  「母ちゃん、眼に何か刺さった、ぬいて頂戴ちょうだい早く早く」と言いました。
-                  　母さん狐がびっくりして、あわてふためきながら、眼を抑えている子供の手を恐る恐るとりのけて見ましたが、何も刺さってはいませんでした。母さん狐は洞穴の入口から外へ出て始めてわけが解わかりました。</p>
-              </dd>
-            </dl>
-          </li>
-          <li>
-            <dl>
-              <dt>
-                <span class="date">2020 / 06 / 06</span>
-                <span class="memo">タイトルタイトルタイトルタイトル</span>
-              </dt>
-              <dd>
-                <p>寒い冬が北方から、狐きつねの親子の棲すんでいる森へもやって来ました。
-                  　或朝あるあさ洞穴ほらあなから子供の狐が出ようとしましたが、
-                  「あっ」と叫んで眼めを抑おさえながら母さん狐のところへころげて来ました。
-                  「母ちゃん、眼に何か刺さった、ぬいて頂戴ちょうだい早く早く」と言いました。
-                  　母さん狐がびっくりして、あわてふためきながら、眼を抑えている子供の手を恐る恐るとりのけて見ましたが、何も刺さってはいませんでした。母さん狐は洞穴の入口から外へ出て始めてわけが解わかりました。</p>
-              </dd>
-            </dl>
-          </li>
-        </ul>
+      <article id="inner">
 
       </article>
     </section>
     <section id="write_area" class="content">
       <h1>WRITE MODE</h1>
       <article>
-        <input type="text" class="memo_title" name="memo_title">
-        <textarea type="text" class="memo_text" name="memo_title"></textarea>
-        <button name="memo_submit">登録</button>
+        <form name="memo_form">
+        <input type="text" class="memo_title" name="memo_title" id="memo_title">
+        <textarea type="text" class="memo_text" name="memo_text" id="memo_text"></textarea>
+        <button name="memo_submit" id="memo_submit">登録</button>
+      </form>
       </article>
     </section>
     <section id="load_area" class="content">
       <h1>DATA UPLOAD</h1>
       <article>
-        <p>バックアップしたデータをアップロードします。アップロードするファイルを選択してください。</p>
+        <p>バックアップしたデータをアップロードします。<br>アップロードするファイルを選択してください。</p>
         <input type="text" name="filename" class="upload_file">
         <button type="submit" name="filename" class="upload_file">選択</button>
         <button type="submit" name="submit" class="submit_file">送信</button>

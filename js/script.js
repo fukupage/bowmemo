@@ -2,22 +2,28 @@
 
 //予め必要な定数や変数を宣言しておく
 //--------------------------------------------------------------------------------------------
-//日時に関するもの
+//現在の日時の取得
 let now = new Date();
-let KEY;
+
+//日時に関するもの（jsonからの読み出し）
 let YY;
 let MM;
 let DD;
 let HOUR;
 let MIN;
 let SEC;
+
+//記事に関するもの（jsonからの読み出し）
 let TITLE;
 let TEXT;
 
+//データのキー
+let KEY;
 
-
-//記事に関するもの
+//記事に関するもの（投稿した記事に関するもの）
 let postItem;
+let PMTitle;
+let PMText;
 
 //ファイル操作に関するもの
 
@@ -26,18 +32,25 @@ let postItem;
 //とりあえず、LocalStorageを利用する。
 //--------------------------------------------------------------------------------------------
 function database() {
-
+  let memoData = "";
+  if(!localStorage.getItem('memoData')){
+    memoData = "ローカルに保存されている記事はありません。";
+  } else {
+    memoData =localStorage.getItem('memoData');
+  }
+  console.log('memoData = ${memoData}');
 }
 
 //取得したファイルから日時とタイトルと記事を取得(fullyear - month - date /hour(24) /min /sec )
 //--------------------------------------------------------------------------------------------
 function timestamp() {
-  const Year = now.getFullYear();
-  const Month = now.getMonth() + 1;
-  const Date = now.getDate();
-  const Hour = now.getHours();
-  const Min = now.getMinutes();
-  const Sec = now.getSeconds();
+
+  let Year = now.getFullYear();
+  let Month = now.getMonth() + 1;
+  let Date = now.getDate();
+  let Hour = now.getHours();
+  let Min = now.getMinutes();
+  let Sec = now.getSeconds();
 
   let postTime = console.log(`today:${Year}/${Month}/${Date}  ${Hour}:${Min}:${Sec}`);
 
@@ -68,15 +81,17 @@ function timeline() {
       TITLE = postItem[i].title;
       TEXT = postItem[i].text;
 
+      //HOMEのHTMLテンプレート
+
       let tlTemp = `
-      <article>
+      <section>
       <h2>${TITLE}</h2>
       <span>${YY} / ${MM} / ${DD} -- ${HOUR}:${MIN}:${SEC}</span>
       <p>${TEXT}</p>
-      </article>
+      </section>
       `;
 
-      document.write(postArea.innerHTML += tlTemp);
+      postArea.innerHTML += tlTemp;
     }
   }
 }
@@ -91,8 +106,21 @@ function login() {
 //記事の投稿（イベントリスナーで投稿ボタンを監視して、クリックされたらタイトルと記事をJson形式で保持）
 //--------------------------------------------------------------------------------------------
 function postmemo() {
+ const memoTitle = document.memo_form.memo_title;
+ const memoText = document.memo_form.memo_text;
+ const memoSubmit = document.getElementById('memo_submit').addEventListener('click', function(e){
+   e.preventDefault();
 
-  //ログインしてない場合はごめんなさいページを表示
+   PMTitle = memoTitle.value;
+   PMText = memoText.value;
+
+
+   console.log(PMTitle);
+   console.log(PMText);
+  });
+
+
+ //ログインしてない場合はごめんなさいページを表示
 
 
   //ログインしている場合は記事の投稿フォームを表示
@@ -125,7 +153,7 @@ function importmemo() {
   //ログインしてない場合はごめんなさいページを表示(iframeで別デザインを読み込む？)
 
 
-  //ログインしている読み込みを表示
+  //アップロードして読み込みデータを表示
 
   let req = new XMLHttpRequest();
   req.onreadystatechange = function () {
@@ -165,5 +193,7 @@ function views() {
 database();
 importmemo();
 timeline();
+postmemo();
 timestamp();
+
 views();

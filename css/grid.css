@@ -1,10 +1,108 @@
 @charset "UTF-8";
 /*　ページの切り替え　*/
-.content {
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #ccc;
+  padding: 3.0rem 0 0.5rem;
+  margin-bottom: 4.0rem;
+}
+
+#menu {
+  padding-top: 15rem;
+}
+
+#menu ul {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 70rem;
+  margin: auto;
+  padding: 0;
+}
+
+#menu ul li {
+  width: 20%;
+  margin: 0;
+}
+
+#menu ul li a {
+  display: block;
+  width: 100%;
+}
+
+main {
+  margin-bottom: 15rem;
+}
+
+main .content {
+  width: 70rem;
+  margin: 2.0rem auto 4.0rem;
   display: none;
 }
 
-.content.active {
+main .content h1 {
+  text-align: center;
+  padding: 0.3rem;
+  border-bottom: 1px dotted #333;
+}
+
+main .content.active {
   display: block;
+}
+
+main .content.active article section {
+  border: 1px solid #333;
+  width: 60rem;
+  padding: 2.0rem;
+  margin: auto;
+  border-radius: 0.5rem;
+}
+
+main .content.active article section + section {
+  margin-top: 2.0rem;
+}
+
+main .content {
+  width: 70rem;
+  margin: 2.0rem auto 4.0rem;
+  display: none;
+}
+
+main .content h1 {
+  text-align: center;
+  padding: 0.3rem;
+  border-bottom: 1px dotted #333;
+}
+
+main .content.active {
+  display: block;
+}
+
+main .content.active article section {
+  border: 1px solid #333;
+  width: 60rem;
+  padding: 2.0rem;
+  margin: auto;
+  border-radius: 0.5rem;
+}
+
+main .content.active article section + section {
+  margin-top: 2.0rem;
+}
+
+footer {
+  width: 100%;
+  background: #ccc;
+  padding: 1.0rem 0 2.0rem;
+  position: fixed;
+  bottom: 0;
+}
+
+footer p {
+  margin: 0;
+  padding: 0;
 }
 /*# sourceMappingURL=grid.css.map */
