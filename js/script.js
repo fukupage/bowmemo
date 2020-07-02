@@ -2,48 +2,55 @@
 
 //予め必要な定数や変数を宣言しておく
 //--------------------------------------------------------------------------------------------
-//現在の日時の取得
+//日時に関するもの
 let now = new Date();
-
-//日時に関するもの（jsonからの読み出し）
+let KEY;
 let YY;
 let MM;
 let DD;
 let HOUR;
 let MIN;
 let SEC;
-
-//記事に関するもの（jsonからの読み出し）
 let TITLE;
 let TEXT;
 
-//データのキー
-let KEY;
 
-//記事に関するもの（投稿した記事に関するもの）
+//記事に関するもの
 let postItem;
 let PMTitle;
 let PMText;
+let postTime;
+let tlTemp;
+let postTemp;
 
 //ファイル操作に関するもの
+
+const menuItems = document.querySelectorAll('#menu li a');
+const contents = document.querySelectorAll('.content');
+let postArea = document.getElementById('inner');
+
+
+//ファイルの読み込み（json形式のログファイルを読み込みます(logディレクトリに格納)）
+//--------------------------------------------------------------------------------------------
+const importmemo = () => {
+
+  //ログインしてない場合はごめんなさいページを表示(iframeで別デザインを読み込む？)
+
+
+}
+
 
 
 
 //とりあえず、LocalStorageを利用する。
 //--------------------------------------------------------------------------------------------
-function database() {
-  let memoData = "";
-  if(!localStorage.getItem('memoData')){
-    memoData = "ローカルに保存されている記事はありません。";
-  } else {
-    memoData =localStorage.getItem('memoData');
-  }
-  console.log('memoData = ${memoData}');
+const database = () => {
+
 }
 
 //取得したファイルから日時とタイトルと記事を取得(fullyear - month - date /hour(24) /min /sec )
 //--------------------------------------------------------------------------------------------
-function timestamp() {
+const timestamp = () => {
 
   let Year = now.getFullYear();
   let Month = now.getMonth() + 1;
@@ -52,26 +59,30 @@ function timestamp() {
   let Min = now.getMinutes();
   let Sec = now.getSeconds();
 
-  let postTime = console.log(`today:${Year}/${Month}/${Date}  ${Hour}:${Min}:${Sec}`);
+  postTime = `today:${Year}/${Month}/${Date}  ${Hour}:${Min}:${Sec}`;
 
   return postTime;
-
-
 }
 
 
 //取得した情報をHOME画面に表示
 //--------------------------------------------------------------------------------------------
-function timeline() {
+const timeline = () => {
   //格納されたjsonファイルを読み込む
-
+  let req = new XMLHttpRequest();
+  req.onreadystatechange = function () {
+    if (req.readyState == 4 && req.status == 200) {
+      postItem = JSON.parse(req.responseText);
+    }
+  };
+  req.open("GET", "log/log.json", false);
+  req.send(null);
   //読み込んだjsonをhtmlとして吐き出す
-  let postArea = document.getElementById('inner');
+  KEY = postItem.length;
 
   for (let i = 0; i < postItem.length; i++) {
-    if(postItem[i] != null){
+    if (postItem[i] != null) {
 
-      KEY = postItem[i].key;
       YY = postItem[i].year;
       MM = postItem[i].month;
       DD = postItem[i].date;
@@ -81,46 +92,59 @@ function timeline() {
       TITLE = postItem[i].title;
       TEXT = postItem[i].text;
 
-      //HOMEのHTMLテンプレート
-
-      let tlTemp = `
+      const tlTemp = `
       <section>
       <h2>${TITLE}</h2>
       <span>${YY} / ${MM} / ${DD} -- ${HOUR}:${MIN}:${SEC}</span>
       <p>${TEXT}</p>
+      <p>${KEY}</p>
       </section>
       `;
-
-      postArea.innerHTML += tlTemp;
+      return tlTemp;
     }
   }
 }
 
 //ログイン機能(ここではGoogleのアカウントなんかでログインができる仕様にします)。
 //--------------------------------------------------------------------------------------------
-function login() {
+const login = () => {
 
 
 }
 
 //記事の投稿（イベントリスナーで投稿ボタンを監視して、クリックされたらタイトルと記事をJson形式で保持）
 //--------------------------------------------------------------------------------------------
-function postmemo() {
- const memoTitle = document.memo_form.memo_title;
- const memoText = document.memo_form.memo_text;
- const memoSubmit = document.getElementById('memo_submit').addEventListener('click', function(e){
-   e.preventDefault();
+const postmemo = (postTemp) => {
+  const memoTitle = document.memo_form.memo_title;
+  const memoText = document.memo_form.memo_text;
+  const memoSubmit = document.getElementById('memo_submit').addEventListener('click', function () {
+    e.preventDefault();
 
-   PMTitle = memoTitle.value;
-   PMText = memoText.value;
+    PMTitle = memoTitle.value;
+    PMText = memoText.value;
 
-
-   console.log(PMTitle);
-   console.log(PMText);
   });
+  YY = now.getFullYear();
+  MM = now.getMonth() + 1;
+  DD = now.getDate();
+  HOUR = now.getMinutes();
+  MIN = now.getMinutes();
+  SEC = now.getSeconds();
+  TITLE = PMTitle;
+  TEXT = PMText;
+
+  postTemp = `
+        <section>
+        <p>aaa-------------------------------------</p>
+        <h2>${TITLE}</h2>
+        <span>${YY} / ${MM} / ${DD} -- ${HOUR}:${MIN}:${SEC}</span>
+        <p>${TEXT}</p>
+        </section>
+        `;
+  return postTemp;
 
 
- //ログインしてない場合はごめんなさいページを表示
+  //ログインしてない場合はごめんなさいページを表示
 
 
   //ログインしている場合は記事の投稿フォームを表示
@@ -135,7 +159,7 @@ function postmemo() {
 
 //ファイルの書き出し（json形式のログファイルを吐き出します）。
 //--------------------------------------------------------------------------------------------
-function getmemo() {
+const getmemo = () => {
 
   //ログインしてない場合はごめんなさいページを表示(iframeで別デザインを読み込む？)
 
@@ -146,33 +170,15 @@ function getmemo() {
 
 }
 
-//ファイルの読み込み（json形式のログファイルを読み込みます(logディレクトリに格納)）
-//--------------------------------------------------------------------------------------------
-function importmemo() {
-
-  //ログインしてない場合はごめんなさいページを表示(iframeで別デザインを読み込む？)
 
 
-  //アップロードして読み込みデータを表示
 
-  let req = new XMLHttpRequest();
-  req.onreadystatechange = function () {
-    if (req.readyState == 4 && req.status == 200) {
-      postItem = JSON.parse(req.responseText);
-    }
-  };
-  req.open("GET", "log/log.json", false);
-  req.send(null);
-}
+(function () {
 
 
-//SPA風の表示
-//見た目のみSPAの動きですが、実際はHTMLの一部だけを表示するというギミック
-//--------------------------------------------------------------------------------------------
-function views() {
-
-  const menuItems = document.querySelectorAll('#menu li a');
-  const contents = document.querySelectorAll('.content');
+  //SPA風の表示
+  //見た目のみSPAの動きですが、実際はHTMLの一部だけを表示するというギミック
+  //--------------------------------------------------------------------------------------------
 
   menuItems.forEach(clickedItem => {
     clickedItem.addEventListener('click', e => {
@@ -188,12 +194,7 @@ function views() {
       document.getElementById(clickedItem.dataset.id).classList.add('active');
     });
   });
-}
+  postArea.innerHTML += postmemo;
+  postArea.innerHTML += timeline;
 
-database();
-importmemo();
-timeline();
-postmemo();
-timestamp();
-
-views();
+})();
